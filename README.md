@@ -1,5 +1,11 @@
 ## Math Server
 
+```bash
+git clone github.com/subtlepseudonym/math-serv
+dep ensure
+go run main.go
+```
+
 This is a simple API server that supports binary math operations.  The operations are specified via the URL path (add, subtract, multiply, etc) and variables ('x' and 'y') can be specified using a few different content types.
 
 + Supported math operations
