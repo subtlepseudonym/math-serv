@@ -14,6 +14,7 @@ import (
 const defaultCacheExpiration time.Duration = time.Minute
 const defaultCacheCleanUp time.Duration = time.Minute * 5
 
+// cacheExpiration allows use to directly change cache expiration time while testing (saves me a few minutes)
 var cacheExpiration = defaultCacheExpiration
 
 // opCache stores all operation answers as interfaces with a timeout of one minute

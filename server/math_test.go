@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -34,7 +35,13 @@ func formURLEncodedRequest(t *testing.T) {
 	contentType := "application/x-www-form-urlencoded"
 
 	for operation := range supportedOperations {
+		t.Log(operation)
 		expectedX, expectedY := 34.854, -0.935
+		if math.IsNaN(supportedOperations[operation](expectedX, expectedY)) {
+			// make y more well-behaved for pow, root, and log
+			expectedY = 1.20034
+		}
+
 		reqURL := fmt.Sprintf("http://localhost:8080/%s?x=%f&y=%f", operation, expectedX, expectedY)
 		// FIXME: method doesn't currently matter (we're not checking it), but this will need to change
 		// if we begin checking method
@@ -76,7 +83,13 @@ func jsonRequest(t *testing.T) {
 	contentType := "application/json"
 
 	for operation := range supportedOperations {
+		t.Log(operation)
 		expectedX, expectedY := -44.444, 1.000001
+		if math.IsNaN(supportedOperations[operation](expectedX, expectedY)) {
+			// make x and y more well-behaved for pow, root, and log
+			expectedX, expectedY = 26.8834, 7.00849
+		}
+
 		reqURL := fmt.Sprintf("http://localhost:8000/%s", operation)
 
 		mathReq := MathRequest{

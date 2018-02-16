@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"math"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -21,6 +22,10 @@ var supportedOperations = map[string]func(float64, float64) float64{
 	"subtract": func(x, y float64) float64 { return x - y },
 	"multiply": func(x, y float64) float64 { return x * y },
 	"divide":   func(x, y float64) float64 { return x / y },
+	"mod":      func(x, y float64) float64 { return math.Mod(x, y) },
+	"pow":      func(x, y float64) float64 { return math.Pow(x, y) },
+	"root":     func(x, y float64) float64 { return math.Pow(x, 1/y) },
+	"log":      func(x, y float64) float64 { return math.Log(x) / math.Log(y) },
 }
 
 func init() {

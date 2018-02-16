@@ -20,7 +20,7 @@ func TestParseClientVars(t *testing.T) {
 	t.Run("form sans header", parseFormWithoutHeader)
 	t.Run("json with header", parseJSONWithHeader)
 	t.Run("json sans header", parseJSONWithoutHeader)
-	t.Run("unsupported type", unsupportedContentType)
+	t.Run("unsupported type", parseUnsupportedContentType)
 }
 
 func parseFormWithHeader(t *testing.T) {
@@ -143,12 +143,12 @@ func parseJSONWithoutHeader(t *testing.T) {
 	}
 }
 
-func unsupportedContentType(t *testing.T) {
+func parseUnsupportedContentType(t *testing.T) {
 	expectedX, expectedY := 0.0, 0.0
 	providedX, providedY := -53.7, 33.2275
 	reqURLStr := "http://localhost:8080/add"
 
-	// FIXME: if we end up supporting xml, this needs to be fixed
+	// FIXME: if we end up supporting xml, this needs to be changed
 	bodyBytes := []byte(fmt.Sprintf("<MathRequest><X>%f</X><Y>%f</Y></MathRequest>", providedX, providedY))
 
 	req := httptest.NewRequest(http.MethodPost, reqURLStr, bytes.NewReader(bodyBytes))
