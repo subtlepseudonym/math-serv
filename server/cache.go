@@ -14,7 +14,7 @@ import (
 const defaultCacheExpiration time.Duration = time.Minute
 const defaultCacheCleanUp time.Duration = time.Minute * 5
 
-var cacheExpiration time.Duration = defaultCacheExpiration
+var cacheExpiration = defaultCacheExpiration
 
 // opCache stores all operation answers as interfaces with a timeout of one minute
 var opCache *cache.Cache

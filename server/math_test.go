@@ -33,7 +33,7 @@ func TestMathHandler(t *testing.T) {
 func formURLEncodedRequest(t *testing.T) {
 	contentType := "application/x-www-form-urlencoded"
 
-	for operation, _ := range supportedOperations {
+	for operation := range supportedOperations {
 		expectedX, expectedY := 34.854, -0.935
 		reqURL := fmt.Sprintf("http://localhost:8080/%s?x=%f&y=%f", operation, expectedX, expectedY)
 		// FIXME: method doesn't currently matter (we're not checking it), but this will need to change
@@ -75,7 +75,7 @@ func formURLEncodedRequest(t *testing.T) {
 func jsonRequest(t *testing.T) {
 	contentType := "application/json"
 
-	for operation, _ := range supportedOperations {
+	for operation := range supportedOperations {
 		expectedX, expectedY := -44.444, 1.000001
 		reqURL := fmt.Sprintf("http://localhost:8000/%s", operation)
 

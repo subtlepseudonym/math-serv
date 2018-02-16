@@ -35,6 +35,8 @@ func GetRouter() *mux.Router {
 
 // mathHandler parses two arguments 'x' and 'y' from the client, applies the requested math operation,
 // builds a MathOKResponse struct, JSON encodes it, and returns it.
+// This functions sets off gocyclo for cyclomatic complexity (11), but I'm going to let it go considering
+// it's the only handler
 func mathHandler(w http.ResponseWriter, r *http.Request) {
 	defer func() {
 		if r.Body == nil {
